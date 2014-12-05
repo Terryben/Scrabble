@@ -93,11 +93,14 @@ class pyscrab():
     pos=t11*15+t12
     if self.empty[pos] is 4:
       return 'TW'
-    elif self.empty[pos] is 3:
-      a
-    elif self.empty[pos] is 4:
-      a
-    if self.empty[pos] is 4:
+    elif self.empty[pos] is 3 or -1:
+      return 'DW'
+    elif self.empty[pos] is 2:
+      return 'TL'
+    elif self.empty[pos] is 1:
+      return 'DL'
+    else:
+      return
      
 if __name__ == "__main__":
   a=pyscrab()
