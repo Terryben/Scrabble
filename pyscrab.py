@@ -87,7 +87,7 @@ class pyscrab():
     else:
      for i in range(len(word)):
         self.board[pos1+(15*i)]=word[i]
-  def multiplier(self,tup)
+  def multiplier(self,tup):
     t11=tup[0]
     t12=tup[1]
     pos=t11*15+t12
@@ -107,4 +107,3 @@ if __name__ == "__main__":
   a.insertword((0,0),(0,11),'abalienation')
   a.insertword((0,7),(11,7),'abalienation')
   a.printboard()
-
