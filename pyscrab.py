@@ -107,3 +107,4 @@ if __name__ == "__main__":
   a.insertword((0,0),(0,11),'abalienation')
   a.insertword((0,7),(11,7),'abalienation')
   a.printboard()
+
