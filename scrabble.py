@@ -21,3 +21,4 @@ class scrabble:
                 self.player2hand.append(self.letterpool.pop(0))
     def lettersleft(self):
         return len(self.letterpool)
+  

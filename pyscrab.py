@@ -88,6 +88,40 @@ class pyscrab():
      for i in range(len(word)):
         self.board[pos1+(15*i)]=word[i]
 
+  def can_insert(self, word_pos, p_hand, word):#word_pos is an array of tuples representing the locations of the letters of 'word'
+    if (word_pos[0][0] - word_pos[len(word)-1][0] == 0):
+      word_is_up_down = True  #word is along the y axis
+    else:
+      word_is_up_down = False  #word is along the x axis
+
+    can_insert = True
+    up_spot = 0
+    down_spot = 0
+    left_spot = 0
+    right_spot = 0
+    needed_letters = word
+    for i in range(0, len(word)):
+      pos = word_pos[i][0]*15+word_pos[i][1]
+      if str(self.board[pos]).isalpha()
+        try:
+          needed_letters.remove(str(self.board[pos]).isalpha())
+        except Error:
+          print "Shouldn't be here, Uh oh"
+      while str(self.board[(word_pos[i][0]-1)*15+word[i][1]]).isalpha():      
+        up_spot = word_pos[i][0]-1)*15+word[i][1]
+      while str(self.board[(word_pos[i][0]+1)*15+word[i][1]]).isalpha():
+        down_spot = word_pos[i][0]+1)*15+word[i][1]
+      while
+
+
+
+    for i in range(0, len(needed_letters)): #Check if the needed letters are in the player's hand
+      try:
+        p_hand.remove(needed_letters[i])
+      except Error:
+        can_insert = False
+     
+
   def multiplierer(self,tup):
     t11=tup[0]
     t12=tup[1]
