@@ -37,7 +37,10 @@ class map_words():
     wordPos = self.findWordPos(tup1, tup2)
     #print "The wordPos is: "
     #print wordPos
-    word = word.lower()
+    low_word = []
+    for i in range(0, len(word)):
+      low_word.append(word[i].lower())
+    word = low_word
     score = 0
     word_mult = 1
     letter_mult = 1
@@ -57,9 +60,11 @@ class map_words():
     return score
 
   def isValidWord(self, word):
-    word = word.lower()
+    low_word = ""
+    for i in range(0, len(word)):
+      low_word += str(word[i])
     try:
-      if self.dictionary[word]:
+      if self.dictionary[low_word]:
         return True
       else:
         return False

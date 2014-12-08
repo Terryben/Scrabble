@@ -88,39 +88,86 @@ class pyscrab():
      for i in range(len(word)):
         self.board[pos1+(15*i)]=word[i]
 
-  def can_insert(self, word_pos, p_hand, word):#word_pos is an array of tuples representing the locations of the letters of 'word'
-    if (word_pos[0][0] - word_pos[len(word)-1][0] == 0):
+  def can_insert(self, word_pos, p_hand, word, map_word):#word_pos is an array of tuples representing the locations of the letters of 'word'
+    print "word pos is: "
+    print word_pos
+    print "word is: " + word
+    if (word_pos[0][1] - word_pos[len(word)-1][1] == 0):
       word_is_up_down = True  #word is along the y axis
     else:
       word_is_up_down = False  #word is along the x axis
 
     can_insert = True
-    up_spot = 0
-    down_spot = 0
-    left_spot = 0
-    right_spot = 0
     needed_letters = word
+
     for i in range(0, len(word)):
       pos = word_pos[i][0]*15+word_pos[i][1]
-      if str(self.board[pos]).isalpha()
+      if str(self.board[pos]).isalpha():
+        if(word_is_up_down):
+          if not self.check_left_right(pos, map_word, word[i]): #if it doesnt form a valid word
+            can_insert = False
+            print "False 1"
+        else:
+          if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
+            can_insert = False
+            print "False 2"
         try:
-          needed_letters.remove(str(self.board[pos]).isalpha())
-        except Error:
+          print "Needed letters are"
+          print needed_letters
+          print "word[i] is "
+          print word[i]
+          needed_letters.remove(word[i])
+        except StandardError:
           print "Shouldn't be here, Uh oh"
-      while str(self.board[(word_pos[i][0]-1)*15+word[i][1]]).isalpha():      
-        up_spot = word_pos[i][0]-1)*15+word[i][1]
-      while str(self.board[(word_pos[i][0]+1)*15+word[i][1]]).isalpha():
-        down_spot = word_pos[i][0]+1)*15+word[i][1]
-      while
-
-
-
+      else:
+        if(word_is_up_down):
+          if not self.check_left_right(pos, map_word, word[i]): #if it doesnt form a valid word
+            can_insert = False
+            print "False 3"
+        else:
+          if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
+            can_insert = False
+            print "False 4"
     for i in range(0, len(needed_letters)): #Check if the needed letters are in the player's hand
       try:
         p_hand.remove(needed_letters[i])
-      except Error:
+      except StandardError:
         can_insert = False
-     
+        print "False 5"
+    return can_insert
+
+  def check_left_right(self, pos, map_word, letter):#(row, column)
+    word = []
+    word.append(letter)
+    left_spot = pos
+    right_spot = pos
+    while str(self.board[right_spot+1]).isalpha(): #loop through and find the right most letter in this row that is connected to the original spot
+      right_spot += 1
+      word.append(str(self.board[right_spot]))
+    while str(self.board[left_spot-1]).isalpha(): #find left most letter
+      left_spot -= 1
+      word.insert(0, str(self.board[left_spot]))
+    if len(word) > 1:
+      return map_word.isValidWord(word)
+    else:
+      return True
+
+  def check_up_down(self, pos, map_word, letter):
+    word = []
+    word.append(letter)
+    up_spot = pos
+    down_spot = pos
+    while str(self.board[up_spot-15]).isalpha():#loop through while traveling up
+      up_spot -= 15
+      word.insert(0, str(self.board[up_spot]))
+    while str(self.board[down_spot+15]).isalpha():#loop through while traveling down
+      down_spot += 15
+      word.append(str(self.board[down_spot]))
+    if len(word) > 1:
+      return map_word.isValidWord(word)
+    else:
+      return True
+
 
   def multiplierer(self,tup):
     t11=tup[0]
