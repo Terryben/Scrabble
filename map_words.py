@@ -21,15 +21,28 @@ class map_words():
     return alphScore
 
   def findWordPos(self, tup1, tup2):
+    #print "IN HERE"
     posArray = []
-    if ((tup1[0] - tup2[0]) == 0):  #the word is along the y axis
-      for i in range(0, tup2[1]-tup1[1]):
-        letterlocal = (tup1[0], tup1[1]+i)
+    #print str(tup1[1] - tup2[1])
+    
+    if ((tup1[1] - tup2[1]) == 0):  #the word is parallel with the y axis
+      #print "here now " + str(abs(tup2[0]-tup1[0]))
+      for i in range(0, abs(tup2[0]-tup1[0])+1):
+        #print "The length in y is: "
+        #print str(tup2[0]-tup1[0])
+        letterlocal = (tup1[0]+i, tup1[1])
+        #print "The letter is: "
+        #print letterlocal
         posArray.append(letterlocal)
       return posArray
     else:        #the word is along the x axis
-      for i in range(0, tup2[0]-tup1[0]):
-        letterlocal = (tup1[0]+i, tup1[1])
+      #print "here now2 " + str(abs(tup2[1]-tup1[1]))
+      for i in range(0, abs(tup2[1]-tup1[1])+1):
+        #print "The length in x is: "
+        #print i
+        letterlocal = (tup1[0], tup1[1]+i)
+        #print "The letter is: "
+        #print letterlocal
         posArray.append(letterlocal)
       return posArray
 
