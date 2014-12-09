@@ -46,7 +46,7 @@ class map_words():
         posArray.append(letterlocal)
       return posArray
 
-  def wordScore(self, word, alphScore, tup1, tup2):
+  def wordScore(self, word, board, tup1, tup2):
     wordPos = self.findWordPos(tup1, tup2)
     #print "The wordPos is: "
     #print wordPos
@@ -58,13 +58,14 @@ class map_words():
     word_mult = 1
     letter_mult = 1
     for i in range(0,len(word)):
-      if wordPos[i] == 'TW':
+      pos = wordPos[i][0]*15+wordPos[i][1]
+      if board.empty[pos] == 'TW':
         word_mult = word_mult*3
-      elif wordPos[i] == 'DW':
+      elif board.empty[pos] == 'DW':
         word_mult = word_mult*2
-      elif wordPos[i] == 'TL':
+      elif board.empty[pos] == 'TL':
         letter_mult = 3
-      elif wordPos[i] == 'DL':
+      elif board.empty[pos] == 'DL':
         letter_mult = 2
       score += self.alphScore[word[i]]*letter_mult
       #print "The word[i] is: " + word[i]

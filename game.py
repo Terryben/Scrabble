@@ -26,7 +26,6 @@ class game:
     while num_args > 1:
       word = sys.argv[num_args-1]
       print word + " is a valid word? " + str(diction.isValidWord(word))
-      print "The word score is: " + str(diction.wordScore(word, diction.alphScore, (1,0), (1, len(word))))
       num_args = num_args - 1
     #board.insertword((0,0), (0, 3), 'add')
     #board.insertword((0,2), (3, 2), 'damn')
@@ -42,6 +41,8 @@ class game:
     player_hand2 = ['p', 'h', 'o', 'n', 'e', 'n', 'o']
     #play_word(board, player_hand, (8, 0), (8, 5), "phone", diction)
     play_word(board, player_hand2, (4, 3), (8, 3), "phone", diction)
+    print "The score is: "
+    print diction.wordScore("phone", board, (7,0), (7, 5)) 
     print "their hand is: "
     print player_hand2
     
