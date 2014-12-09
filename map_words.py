@@ -59,17 +59,23 @@ class map_words():
     letter_mult = 1
     for i in range(0,len(word)):
       pos = wordPos[i][0]*15+wordPos[i][1]
-      if board.empty[pos] == 'TW':
+      print board.empty[pos]
+      if board.empty[pos] == 4:
         word_mult = word_mult*3
-      elif board.empty[pos] == 'DW':
+        print "word mult is: " + str(word_mult)
+      elif board.empty[pos] == 3 or   board.empty[pos] == -1:
         word_mult = word_mult*2
-      elif board.empty[pos] == 'TL':
+        print "word mult is: " + str(word_mult)
+      elif board.empty[pos] == 2:
         letter_mult = 3
-      elif board.empty[pos] == 'DL':
+        print "letter mult is: " + str(letter_mult)
+      elif board.empty[pos] == 1:
         letter_mult = 2
+        print "letter mult is: " + str(letter_mult)
       score += self.alphScore[word[i]]*letter_mult
       #print "The word[i] is: " + word[i]
       letter_mult = 1
+      
     score = score*word_mult
     return score
 
