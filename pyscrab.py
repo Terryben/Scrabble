@@ -94,8 +94,10 @@ class pyscrab():
     #print "word is: " + word
     try:
       if (word_pos[len(word)-1][0] - word_pos[0][0] < 0) or (word_pos[len(word)-1][1] - word_pos[0][1] < 0):
+        print "check 1"
         return False
       if (word_pos[0][0] - word_pos[len(word)-1][0] == 0) and (word_pos[0][1] - word_pos[len(word)-1][1] == 0) and len(word) != 1:
+        print "check 2"
         return False
     except StandardError:
       return False
@@ -139,7 +141,7 @@ class pyscrab():
             #print "False 3"
         else:
           if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
-            print self.check_up_down(pos, map_word, word[i])
+            #print self.check_up_down(pos, map_word, word[i])
             can_insert = False
             #print "False 4"
     if(word_is_up_down):
@@ -156,14 +158,85 @@ class pyscrab():
           #print "P hand in false 5 is: "
           #print p_hand
           #print "the needed letter is: "
-          #print needed_letters[i]
+          print needed_letters[i]
           p_hand.remove(needed_letters[i])
         except StandardError:
+          print needed_letters[i] + " added back"
           can_insert = False
           for j in range(0, i):
             p_hand.append(needed_letters[j])
           #print "False 5"
     return can_insert
+
+  def can_insert2(self, word_pos, p_hand, word, map_word):#word_pos is an array of tuples representing the locations of the letters of 'word'
+    #print "word pos is: "
+    #print word_pos
+    #print "word is: " + word
+    try:
+      if (word_pos[len(word)-1][0] - word_pos[0][0] < 0) or (word_pos[len(word)-1][1] - word_pos[0][1] < 0):
+        #print "check 1"
+        return False
+      if (word_pos[0][0] - word_pos[len(word)-1][0] == 0) and (word_pos[0][1] - word_pos[len(word)-1][1] == 0) and len(word) != 1:
+        #print "check 2"
+        return False
+    except StandardError:
+      return False
+    if (word_pos[0][1] - word_pos[len(word)-1][1] == 0):
+      word_is_up_down = True  #word is along the y axis
+    else:
+      word_is_up_down = False  #word is along the x axis
+
+    room_to_play = len(word) #Make sure that at least one letter will be played from the player's hand
+    can_insert = True  #will be set to false if any problems are found
+    needed_letters = [] #list of letters the player will need in their hand
+    for i in range(0, len(word)):
+      needed_letters.append(word[i])
+
+    if (word_pos[0][0] - word_pos[len(word)-1][0] != 0) and (word_pos[0][1] - word_pos[len(word)-1][1] != 0): # word is not a straight line
+      can_insert = False
+    for i in range(0, len(word)):
+      pos = word_pos[i][0]*15+word_pos[i][1]
+      if str(self.board[pos]).isalpha():
+        room_to_play -= 1
+        if(word_is_up_down):
+          if not self.check_left_right(pos, map_word, word[i]): #if it doesnt form a valid word
+            can_insert = False
+            #print "False 1"
+        else:
+          if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
+            can_insert = False
+            #print "False 2"
+        try:
+          #print "Needed letters are"
+          #print needed_letters
+          #print "word[i] is "
+          #print word[i]
+          needed_letters.remove(word[i])
+        except StandardError:
+          print "Shouldn't be here, Uh oh"
+      else:
+        if(word_is_up_down):
+          if not self.check_left_right(pos, map_word, word[i]): #if it doesnt form a valid word
+            can_insert = False
+            #print "False 3"
+        else:
+          if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
+            #print self.check_up_down(pos, map_word, word[i])
+            can_insert = False
+            #print "False 4"
+    if(word_is_up_down):
+      if not self.last_check_up_down(word_pos, word, map_word):
+        can_insert = False
+    else:
+      if not self.last_check_left_right(word_pos, word, map_word):
+        can_insert = False
+    if room_to_play == 0:
+      can_insert = False
+    if  can_insert:
+      put_back = []
+    return can_insert
+
+
 
   def last_check_up_down(self, word_pos, word_inc, map_word):
     word = []

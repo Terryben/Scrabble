@@ -421,7 +421,7 @@ class WordSearch:
   def value(self, state):
     asdf=map_words()
     #print state[0]
-    if asdf.isValidWord(state[0]) is False:# or self.board.can_insert(asdf.findWordPos(state[1],state[2]),state[4],state[0],asdf) is False: 
+    if asdf.isValidWord(state[0]) is False or self.board.can_insert2(asdf.findWordPos(state[1],state[2]),state[4],state[0],asdf) is False: 
       return 0
     else:
       return asdf.wordScore(state[0],self.board,state[1],state[2])
