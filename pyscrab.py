@@ -92,6 +92,13 @@ class pyscrab():
     #print "word pos is: "
     #print word_pos
     #print "word is: " + word
+    try:
+      if (word_pos[len(word)-1][0] - word_pos[0][0] < 0) or (word_pos[len(word)-1][1] - word_pos[0][1] < 0):
+        return False
+      if (word_pos[0][0] - word_pos[len(word)-1][0] == 0) and (word_pos[0][1] - word_pos[len(word)-1][1] == 0) and len(word) != 1:
+        return False
+    except StandardError:
+      return False
     if (word_pos[0][1] - word_pos[len(word)-1][1] == 0):
       word_is_up_down = True  #word is along the y axis
     else:
@@ -103,7 +110,7 @@ class pyscrab():
     for i in range(0, len(word)):
       needed_letters.append(word[i])
 
-    if (word_pos[0][0] - word_pos[1][0] != 0) and (word_pos[0][1] - word_pos[1][1] != 0): # word is not a straight line
+    if (word_pos[0][0] - word_pos[len(word)-1][0] != 0) and (word_pos[0][1] - word_pos[len(word)-1][1] != 0): # word is not a straight line
       can_insert = False
     for i in range(0, len(word)):
       pos = word_pos[i][0]*15+word_pos[i][1]
@@ -132,26 +139,30 @@ class pyscrab():
             #print "False 3"
         else:
           if not self.check_up_down(pos, map_word, word[i]):  #if it doesnt form a valid word
+            print self.check_up_down(pos, map_word, word[i])
             can_insert = False
             #print "False 4"
     if(word_is_up_down):
-      can_insert = self.last_check_up_down(word_pos, word, map_word)
-    else:
-      can_insert = self.last_check_left_right(word_pos, word, map_word)
-    for i in range(0, len(needed_letters)): #Check if the needed letters are in the player's hand
-      try:
-        #print "P hand in false 5 is: "
-        #print p_hand
-        #print "the needed letter is: "
-        #print needed_letters[i]
-        p_hand.remove(needed_letters[i])
-      except StandardError:
+      if not self.last_check_up_down(word_pos, word, map_word):
         can_insert = False
-        for j in range(0, i):
-          p_hand.append(needed_letters[j])
-        #print "False 5"
+    else:
+      if not self.last_check_left_right(word_pos, word, map_word):
+        can_insert = False
     if room_to_play == 0:
       can_insert = False
+    if  can_insert:
+      for i in range(0, len(needed_letters)): #Check if the needed letters are in the player's hand
+        try:
+          #print "P hand in false 5 is: "
+          #print p_hand
+          #print "the needed letter is: "
+          #print needed_letters[i]
+          p_hand.remove(needed_letters[i])
+        except StandardError:
+          can_insert = False
+          for j in range(0, i):
+            p_hand.append(needed_letters[j])
+          #print "False 5"
     return can_insert
 
   def last_check_up_down(self, word_pos, word_inc, map_word):

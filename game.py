@@ -42,6 +42,9 @@ class game:
           can_play_word = False
         if can_play_word:
           if self.play_word(board, player.player_hand, tup1, tup2, word, diction):
+            score= diction.wordScore(word, board, tup1, tup2)
+            player.score += score
+            print word + " was worth " + str(score) + " points! Your score is now " + str(player.score)
             turn_over = True
       elif usr_input == "2":
         turn_over = True
@@ -56,11 +59,12 @@ if __name__ == "__main__":
   name = raw_input("Please enter your name: ")
   human = player.player(name)
   comp = player.player("computer")
-  print human.name
   board.printboard()
-  print ""  
-  g.human_turn(human, scrabble, board, diction)
-  board.printboard() 
+  print "" 
+  while True: 
+    g.human_turn(human, scrabble, board, diction)
+    board.printboard()
+    print "" 
     #while True:
     #  print play_game.board.board
       
