@@ -44,25 +44,27 @@ class WordSearch:
     state1=colec(state[0],state[1],state[2],list(state[3]),list(state[4]))
     if state1.gettup1() == ((0,0),(0,0)) and len(state1.gettup2()) ==0 and state1.word is '':
       pos=[]
-      for i in range(len((self.board.board))):
-        if str(self.board.board[i]).isalpha():
-          pos.append([i/15,i%15])
+      while True:
+      	#for i in range(len((self.board.board))):
+      	rand=random.randint(0,len((self.board.board))-1)
+        if str(self.board.board[rand]).isalpha():
+          pos.append([rand/15,rand%15])
           break;
       #print getpos(self.board.board,tuple(pos[0]))
       temp=pos[0]
       #while str(getpos(self.board.board,(temp[0],temp[1]+1))).isalpha():
       #  temp=list((temp[0],temp[1]+1))
        # print getpos(self.board.board,tuple(temp))
-      if pos[0][0] is not 0:
+      if pos[0][0] is not 0 and str(getpos(self.board.board,(pos[0][0]-1,pos[0][1]))).isalpha() is False:
         for i in state1.hand:
           actions.append((i,(pos[0][0]-1,pos[0][1]),'u'))
-      if pos[0][1] is not 0:
+      if pos[0][1] is not 0 and str(getpos(self.board.board,(pos[0][0],pos[0][1]-1))).isalpha() is False:
         for i in state1.hand:
           actions.append((i,(pos[0][0],pos[0][1]-1),'l'))      
-      if str(getpos(self.board.board,(pos[0][0]+1,pos[0][1]))).isalpha() is False:
+      if pos[0][0] is not 15 and str(getpos(self.board.board,(pos[0][0]+1,pos[0][1]))).isalpha() is False:
         for i in state1.hand:
           actions.append((i,(pos[0][0]+1,pos[0][1]),'d')) 
-      if str(getpos(self.board.board,(pos[0][0],pos[0][1]+1))).isalpha() is False:
+      if pos[0][1] is not 15 and str(getpos(self.board.board,(pos[0][0],pos[0][1]+1))).isalpha() is False:
         for i in state1.hand:
           actions.append((i,(pos[0][0],pos[0][1]+1),'r'))                       
       #print state.hand
@@ -467,4 +469,3 @@ class WordSearch:
 #    G =WordSearch(a,player.player_hand)
 #    test5=search.hill_climbing(G)
 #    print asdf.wordScore(test5[0],a,test5[1],test5[2]),test5[0]
-
