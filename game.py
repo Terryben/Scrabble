@@ -59,11 +59,16 @@ class game:
       random.shuffle(player.player_hand)
       word_s = WordSearch(board, player.player_hand)
       ws=search.hill_climbing(word_s)
-      if diction.wordScore(ws[0],board,ws[1],ws[2]) > max_score:
+      print ws
+      if diction.wordScore(ws[0],board,ws[1],ws[2]) >= max_score:
         max_score = diction.wordScore(ws[0],board,ws[1],ws[2])
         big = ws
-      print big
-    board.insertword( big[1], big[2], big[0])
+      #def play_word(self, board, p_hand, tup1, tup2, word, diction):
+    print 'HERE'
+    print big
+    
+    self.play_word(board,list(player.player_hand),big[1],big[2],big[0],diction)
+    #board.insertword( big[1], big[2], big[0])
     score= diction.wordScore(big[0], board, big[1], big[2])
     player.score += score
     print big[0] + " was worth " + str(score) + " points! Your score is now " + str(player.score)
