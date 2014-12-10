@@ -103,6 +103,8 @@ class pyscrab():
     for i in range(0, len(word)):
       needed_letters.append(word[i])
 
+    if (word_pos[0][0] - word_pos[1][0] != 0) and (word_pos[0][1] - word_pos[1][1] != 0): # word is not a straight line
+      can_insert = False
     for i in range(0, len(word)):
       pos = word_pos[i][0]*15+word_pos[i][1]
       if str(self.board[pos]).isalpha():
@@ -145,7 +147,7 @@ class pyscrab():
         p_hand.remove(needed_letters[i])
       except StandardError:
         can_insert = False
-        for j in range(0, i-1):
+        for j in range(0, i):
           p_hand.append(needed_letters[j])
         #print "False 5"
     if room_to_play == 0:
