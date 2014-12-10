@@ -4,6 +4,7 @@ from pyscrab import *
 import map_words
 import scrabble
 import player
+from WordSearch import *
 
 class game:
   
@@ -50,21 +51,62 @@ class game:
         turn_over = True
     return
       
+  def comp_turn(self, scrabble, player, diction, board):
+    scrabble.draw(player)
+    big=0
+    max_score=0
+    for j in xrange(10):
+      random.shuffle(player.player_hand)
+      word_s = WordSearch(board, player.player_hand)
+      ws=search.hill_climbing(word_s)
+      if diction.wordScore(ws[0],board,ws[1],ws[2]) > max_score:
+        max_score = diction.wordScore(ws[0],board,ws[1],ws[2])
+        big = ws
+      print big
+    board.insertword( big[1], big[2], big[0])
+    score= diction.wordScore(big[0], board, big[1], big[2])
+    player.score += score
+    print big[0] + " was worth " + str(score) + " points! Your score is now " + str(player.score)
 
+    
 if __name__ == "__main__":
   board = pyscrab()
-  diction = map_words.map_words()
-  scrabble = scrabble.scrabble()
+  diction = map_words()
+  scrabble = scrabble()
   g = game()
   name = raw_input("Please enter your name: ")
   human = player.player(name)
-  comp = player.player("computer")
+  comp = player.player("Computer")
   board.printboard()
-  
   print "" 
   while True: 
+    if (len(scrabble.letterpool) < 7):
+      print human.name + " had a score of " + str(human.score) + "!"
+      print comp.name + " had a score of " + str(comp.score) + "!"
+      if(human.score > comp.score):
+        print human.name + " wins!"
+        sys.exit(0)
+      elif(human.score < comp.score):
+        print comp.name + " wins!"
+        sys.exit(0)
+      else: 
+        print "It's a tie!"
+        sys.exit(0)
     g.human_turn(human, scrabble, board, diction)
     board.printboard()
-    print "" 
-    
-    
+    print ""
+    if (len(scrabble.letterpool) < 7):
+      print human.name + " had a score of " + str(human.score) + "!"
+      print comp.name + " had a score of " + str(comp.score) + "!"
+      if(human.score > comp.score):
+        print human.name + " wins!"
+        sys.exit(0)
+      elif(human.score < comp.score):
+        print comp.name + " wins!"
+        sys.exit(0)
+      else: 
+        print "It's a tie!"
+        sys.exit(0) 
+    g.comp_turn(scrabble, comp, diction, board)
+    board.printboard()
+    print ""

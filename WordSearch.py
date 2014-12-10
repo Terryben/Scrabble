@@ -4,6 +4,7 @@ from pyscrab import pyscrab
 from scrabble import scrabble
 from map_words import *
 import random
+import player
 
 class colec:
   def __init__ (self,word,tup11,tup12,lista,playerhand):
@@ -417,7 +418,8 @@ class WordSearch:
     return
   def value(self, state):
     asdf=map_words()
-    if asdf.isValidWord(state[0]) is False:
+    #print state[0]
+    if asdf.isValidWord(state[0]) is False:# or self.board.can_insert(asdf.findWordPos(state[1],state[2]),state[4],state[0],asdf) is False: 
       return 0
     else:
       return asdf.wordScore(state[0],self.board,state[1],state[2])
@@ -425,38 +427,44 @@ class WordSearch:
     return c+1 
     
     
-if __name__ == "__main__":
-  a=pyscrab()
+#if __name__ == "__main__":
+#  a=pyscrab()
   #a.insertword((1,1),(1,11),'abalienation')
   #a.insertword((1,1),(12,1),'abalienation')
-  a.insertword((6,7),(9,7),'test')
+#  a.insertword((6,7),(9,7),'test')
   #a.printboard()
-  '''
-  b=scrabble()
-  print b.player2hand
-  c=WordSearch(a.board,b.player2hand)
-  z=c.actions(c.initial)
+#  '''
+#  b=scrabble()
+#  print b.player2hand
+#  c=WordSearch(a.board,b.player2hand)
+#  z=c.actions(c.initial)
   
-  print temp
+#  print temp
   #print temp
-  z1=c.actions(temp)
-  temp1=c.result(temp,z1[19])
-  print temp1
-  '''
+#  z1=c.actions(temp)
+#  temp1=c.result(temp,z1[19])
+#  print temp1
+#  '''
 
-  b=scrabble()
+#  b=scrabble()
+#  player = player.player("test")
+#  b.draw(player)
   #print b.player2hand
-  c=WordSearch(a,b.player2hand)
-  z=c.actions(c.initial)
-  temp=c.result(c.initial,z[0])
-  G =WordSearch(a,b.player2hand)
-  asdf=map_words()
-  test4=search.simulated_annealing(G)
-  test5=search.hill_climbing(G)
-  for i in test4.path():
-    if asdf.isValidWord(i.state[0]) is True:
-      print asdf.wordScore(i.state[0],a,i.state[1],i.state[2]),i.state[0]
-  for i in test5.path():
-    if asdf.isValidWord(i.state[0]) is True:
-      print asdf.wordScore(i.state[0],a,i.state[1],i.state[2]),i.state[0]
-  
+#  c=WordSearch(a,player.player_hand)
+#  z=c.actions(c.initial)
+#  temp=c.result(c.initial,z[0])
+#  hand=player.player_hand
+#  G =WordSearch(a,hand)
+#  asdf=map_words()
+#  test4=search.simulated_annealing(G)
+#  state=0
+#  largest=0
+#  for i in test4.path():
+#    if asdf.isValidWord(i.state[0]) is True:
+#      print asdf.wordScore(i.state[0],a,i.state[1],i.state[2]),i.state[0]
+#  for i in xrange(10):
+#    random.shuffle(hand)
+#    G =WordSearch(a,player.player_hand)
+#    test5=search.hill_climbing(G)
+#    print asdf.wordScore(test5[0],a,test5[1],test5[2]),test5[0]
+
