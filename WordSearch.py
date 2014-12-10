@@ -173,7 +173,7 @@ class WordSearch:
     return actions
   def result(self,state,action):
     state1=colec(state[0],state[1],state[2],list(state[3]),list(state[4]))
-    print str(state) +  '   printing state   action: ' + str(action[2])
+    #print str(state) +  '   printing state   action: ' + str(action[2])
    # print str(state1)  + ' in result'
     #print action
     tempstring=""
@@ -209,7 +209,7 @@ class WordSearch:
      # print action
       b.remove(action[0])
       c=colec(tempstring,action[1],temp,a,b).totup()
-      print c
+     # print c
       return c
       
       
@@ -241,7 +241,7 @@ class WordSearch:
       b.remove(action[0])
       #print tempstring
       c=colec(tempstring,action[1],temp,a,b).totup()
-      print c
+     # print c
       return c
       
     elif action[2] is 'd' and action[1] not in asd:
@@ -268,7 +268,7 @@ class WordSearch:
       b.remove(action[0])
       #print tempstring
       c=colec(tempstring,temp,action[1],a,b).totup()
-      print c
+      #print c
       return c
       
     elif action[2] is 'r' and action[1] not in asd:
@@ -295,12 +295,12 @@ class WordSearch:
       b=state1.hand
       b.remove(action[0])
       c=colec(tempstring,temp,action[1],a,b).totup()
-      print c
+      #print c
       return c
     
     elif action[2] is 'replace':
-      print 'in replace ' + str(action)
-      print str(state) + ' start'
+      #print 'in replace ' + str(action)
+      #print str(state) + ' start'
       pos=state1.gettup1()
       spot=action[1]
       temp=state1.start
@@ -314,10 +314,10 @@ class WordSearch:
       if pos[0][0] is pos[1][0]:
         counter=0
         while True:
-          print temp, action[1]
+          #print temp, action[1]
           if temp[0] == action[1][0] and temp[1] == action[1][1]:
             tempstring=tempstring+action[0]
-            print 'found it'
+           # print 'found it'
           else:
             #print temp
             tempstring=tempstring+state1.word[counter]
@@ -331,7 +331,7 @@ class WordSearch:
         while True:
           if temp[0] == action[1][0] and temp[1] == action[1][1]:
             tempstring=tempstring+action[0]
-            print 'found it'
+            #print 'found it'
           else:
            # print temp
             tempstring=tempstring+state1.word[counter]
@@ -348,15 +348,15 @@ class WordSearch:
       a.remove((action[1],action[3]))
       a.append((action[1],action[0]))
       c=colec(tempstring,state1.start,state1.end,a,b).totup()
-      print str(c)+ ' finish'
+      #print str(c)+ ' finish'
       return c
       
       
       
       
     elif action[2] is 'remove':
-      print 'in remove ' + str(action)
-      print str(state) + ' start'
+     # print 'in remove ' + str(action)
+     # print str(state) + ' start'
       pos=state1.gettup1()
       temp= state1.start
       temp1=state1.end
@@ -396,13 +396,13 @@ class WordSearch:
       b=state1.hand
       b.append(action[0])
       c=colec(tempstring,temp,temp1,a,b).totup()
-      print str(c) + ' finish'
+     # print str(c) + ' finish'
       return c
       
       
     elif action[2] is 'change':
-      print 'in change '  + str(action)
-      print str(state) + ' start'
+    #  print 'in change '  + str(action)
+     # print str(state) + ' start'
       a=state1.last
       b=state1.hand
       for i in state1.last:
@@ -410,7 +410,7 @@ class WordSearch:
         a.remove(i)
       tempstring=str(getpos(self.board.board,action[1]))
       c=colec(tempstring,action[1],action[1],a,b).totup()
-      print str(c) + ' finish'
+      #print str(c) + ' finish'
       return c
     
     
