@@ -60,41 +60,11 @@ if __name__ == "__main__":
   human = player.player(name)
   comp = player.player("computer")
   board.printboard()
+  
   print "" 
   while True: 
     g.human_turn(human, scrabble, board, diction)
     board.printboard()
     print "" 
-    #while True:
-    #  print play_game.board.board
-      
-    #player_hand = ['p', 'h', 'o', 'n', 'e', 'n', 'o']
-    #player_hand2 = ['n', 'o']
-    #num_args = len(sys.argv)
-
-    #while num_args > 1:
-    #  word = sys.argv[num_args-1]
-    #  print word + " is a valid word? " + str(diction.isValidWord(word))
-    #  num_args = num_args - 1
-    #board.insertword((0,0), (0, 3), 'add')
-    #board.insertword((0,2), (3, 2), 'damn')
-    #play_word(board, player_hand, (7, 0), (7, 5), "phone", diction)
-    #print "p_hand is: "
-    #print player_hand
-    #play_word(board, player_hand, (7, 0), (7, 5), "phone", diction)
-    #print "P_hand after second insert is: "
-    #print player_hand
-    #play_word(board, player_hand2, (3, 2), (3, 3), "no", diction)
-    #print "their hand is: "
-    #print player_hand2
-    #player_hand2 = ['p', 'h', 'o', 'n', 'e', 'n', 'o']
-    #play_word(board, player_hand, (8, 0), (8, 5), "phone", diction)
-    #play_word(board, player_hand2, (4, 3), (8, 3), "phone", diction)
-    #print "The score is: "
-    #print diction.wordScore("phone", board, (7,0), (7, 5)) 
-    #print "their hand is: "
-    #print player_hand2
-    #player_hand2 = ['p', 'h', 'o', 'n', 'e', 'n', 'o']
-    #play_word(board, player_hand2, (0, 0), (0, 4), "phone", diction)
     
     
