@@ -94,10 +94,10 @@ class pyscrab():
     #print "word is: " + word
     try:
       if (word_pos[len(word)-1][0] - word_pos[0][0] < 0) or (word_pos[len(word)-1][1] - word_pos[0][1] < 0):
-        print "check 1"
+        #print "check 1"
         return False
       if (word_pos[0][0] - word_pos[len(word)-1][0] == 0) and (word_pos[0][1] - word_pos[len(word)-1][1] == 0) and len(word) != 1:
-        print "check 2"
+        #print "check 2"
         return False
     except StandardError:
       return False
@@ -114,6 +114,7 @@ class pyscrab():
 
     if (word_pos[0][0] - word_pos[len(word)-1][0] != 0) and (word_pos[0][1] - word_pos[len(word)-1][1] != 0): # word is not a straight line
       can_insert = False
+      #print "false 12"
     for i in range(0, len(word)):
       pos = word_pos[i][0]*15+word_pos[i][1]
       if str(self.board[pos]).isalpha():
@@ -150,7 +151,9 @@ class pyscrab():
     else:
       if not self.last_check_left_right(word_pos, word, map_word):
         can_insert = False
+        #print "false 11"
     if room_to_play == 0:
+      #print "false 12"
       can_insert = False
     if  can_insert:
       for i in range(0, len(needed_letters)): #Check if the needed letters are in the player's hand
@@ -158,10 +161,10 @@ class pyscrab():
           #print "P hand in false 5 is: "
           #print p_hand
           #print "the needed letter is: "
-          print needed_letters[i]
+          #print needed_letters[i]
           p_hand.remove(needed_letters[i])
         except StandardError:
-          print needed_letters[i] + " added back"
+          #print needed_letters[i] + " added back"
           can_insert = False
           for j in range(0, i):
             p_hand.append(needed_letters[j])
@@ -263,7 +266,7 @@ class pyscrab():
     right_spot = word_pos[len(word)-1][0]*15+word_pos[len(word)-1][1]
     while str(self.board[left_spot-1]).isalpha():#loop through while traveling up
       left_spot -= 1
-      word.insert(0, str(self.board[leftp_spot]))
+      word.insert(0, str(self.board[left_spot]))
     while str(self.board[right_spot+1]).isalpha():#loop through while traveling down
       right_spot += 1
       word.append(str(self.board[right_spot]))
@@ -285,6 +288,8 @@ class pyscrab():
       word.insert(0, str(self.board[left_spot]))
     if len(word) > 1:
       return map_word.isValidWord(word)
+      #print "In the check the word is: "
+      #print word
     else:
       return True
 
@@ -301,6 +306,8 @@ class pyscrab():
       word.append(str(self.board[down_spot]))
     if len(word) > 1:
       return map_word.isValidWord(word)
+      #print "In the check the word is: "
+      #print word
     else:
       return True
 

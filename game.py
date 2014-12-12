@@ -30,14 +30,20 @@ class game:
         can_play_word = True
         try:
           word = raw_input("Please enter the word you would like to place: ").split(' ', 1)[0]
-          pos1 = raw_input("Please enter the starting point of your word as \"(X,X)\": ")
-          pos2 = raw_input("Please enter the ending point of your word as \"(X,X)\": ")
+          pos1 = raw_input("Please enter the starting point of your word as \"X,X\": ").split(",", 1)
+          pos2 = raw_input("Please enter the ending point of your word as \"X,X\": ").split(",", 1)
           #print word
           #print pos1
           #print pos2
-          tup1 = (int(pos1[1]), int(pos1[3]))
+          #print pos1[0]
+          #print pos1[1]
+          #print pos2[0]
+          #print pos2[1]
+          tup1 = (int(pos1[0]), int(pos1[1]))
          # print pos1[1] + " " + pos1[3]
-          tup2 = (int(pos2[1]), int(pos2[3]))
+          tup2 = (int(pos2[0]), int(pos2[1]))
+          #print tup1
+          #print tup2
         except StandardError:
           print "Incorrect formatting."
           can_play_word = False
